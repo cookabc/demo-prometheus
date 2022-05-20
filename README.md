@@ -15,6 +15,13 @@
 #### Disable metrics-server
 `minikube addons disable metrics-server`
 
+#### Add repo
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+```
+
 #### Install promethues
 `helm install promethues prometheus-community/kube-prometheus-stack`
 ![img.png](helm_install.png)
