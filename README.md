@@ -1,4 +1,4 @@
-# demo-promethues
+# demo-prometheus
 ![img.png](grafana.png)
 
 ## Pre-requisites
@@ -22,9 +22,22 @@ helm repo add stable https://charts.helm.sh/stable
 helm repo update
 ```
 
-#### Install promethues
-`helm install promethues prometheus-community/kube-prometheus-stack`
-![img.png](helm_install.png)
+#### Install prometheus
+`helm install prometheus prometheus-community/kube-prometheus-stack`
+
+#### Open prometheus
+`kubectl port-forward service/prometheus-kube-prometheus-prometheus 9090`
+![img.png](prometheus.png)
+
+#### Create mongodb resources
+`kubectl apply -f mongodb-without-exporter.yaml`
+
+#### Create mongodb exporter
+`helm install mongodb-exporter prometheus-community/prometheus-mongodb-exporter -f values.yaml`
+
+#### Open mongodb exporter
+`kubectl port-forward service/mongodb-exporter-prometheus-mongodb-exporter 9216`
+![img.png](mongodb-exporter.png)
 
 #### Open grafana
-`k port-forward deployment/promethues-grafana 3000`
+`k port-forward deployment/prometheus-grafana 3000`
